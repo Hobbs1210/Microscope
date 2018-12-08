@@ -1,0 +1,26 @@
+#! /bin/sh
+
+/bin/mount -a
+
+for initscript in /etc/init.d/S[0-9][0-9]*
+do
+	if [ -x $initscript ] ;
+	then
+		echo "[RCS]: $initscript"
+		$initscript
+	fi
+done
+
+
+if [ -x /usr/sbin/telnetd ] ;
+then
+    telnetd&
+fi
+
+#umount -l /myapp/
+#mount -t tmpfs -o size=8m none /myapp
+#mount -t jffs2 /dev/mtdblock2 /config/
+
+#tar xzf /usr/wpa_supplicant.tar -C /myapp/.
+#tar xzf /config/smallapp/smtpclient.tar  -C /myapp/.
+./mm.sh
